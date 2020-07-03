@@ -20,10 +20,10 @@ install_phrase() {
   mkdir -p "${install_path}"
   mkdir -p "${bin_install_path}"
 
-  local bin_path="${bin_install_path}/phraseapp"
-  echo "Downloading PhraseApp client from ${download_url}"
+  local bin_path="${bin_install_path}/phrase"
+  echo "Downloading Phrase client from ${download_url}"
   curl -L -s "$download_url" | tar -C "${install_path}" -xz
-  mv "${install_path}/phraseapp_${platform}_${arch}" "${bin_install_path}/phraseapp"
+  mv "${install_path}/phrase_${platform}_${arch}" "${bin_install_path}/phrase"
   chmod +x $bin_path
 }
 
@@ -39,7 +39,7 @@ get_download_url() {
   local version="$1"
   local platform="$(get_platform)"
   local arch="$(get_arch)"
-  echo "https://github.com/phrase/phraseapp-client/releases/download/${version}/phraseapp_${platform}_${arch}.tar.gz"
+  echo "https://github.com/phrase/phrase-cli/releases/download/${version}/phrase_${platform}_${arch}.tar.gz"
 }
 
 install_phrase $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
