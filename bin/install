@@ -23,12 +23,20 @@ install_phrase() {
   local bin_path="${bin_install_path}/phrase"
   echo "Downloading Phrase client from ${download_url}"
   curl -L -s "$download_url" | tar -C "${install_path}" -xz
-  mv "${install_path}/phrase_${platform}_${arch}" "${bin_install_path}/phrase"
+  if [ $platform == "macosx" ]; then
+    mv "${install_path}/phrase" "${bin_install_path}/phrase"
+  else
+    mv "${install_path}/phrase_${platform}_${arch}" "${bin_install_path}/phrase"
+  fi
   chmod +x $bin_path
 }
 
 get_platform() {
-  uname | tr 'A-Z' 'a-z'
+  local platform=$(uname | tr 'A-Z' 'a-z')
+  if [ $platform == "darwin" ]; then
+    platform="macosx"
+  fi
+  echo $platform
 }
 
 get_arch() {
