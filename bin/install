@@ -40,7 +40,15 @@ get_platform() {
 }
 
 get_arch() {
-  [[ "x86_64" == "$(uname -m)" ]] && echo "amd64" || echo "i386"
+  local arch=$(uname -m)
+  if [ $arch == "x86_64" ]; then
+    arch="amd64"
+  elif [ $arch == "arm64" ]; then
+    arch="arm64"
+  else
+    arch="386"
+  fi
+  echo $arch
 }
 
 get_download_url() {
